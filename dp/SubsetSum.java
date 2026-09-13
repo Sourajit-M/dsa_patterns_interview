@@ -16,18 +16,18 @@ public class SubsetSum {
             dp[0][s] = false;
         }
 
-        for(int i=1; i<=n; i++){
+        for(int i=0; i<n; i++){
             for(int s=1; s<=sum; s++){
                 //dont include the element
-                boolean no = dp[i-1][s];
+                boolean no = dp[i][s];
                 //include the element
                 
                 boolean yes = false;
-                if(arr[i - 1] <= s){
-                    yes = dp[i-1][s - arr[i-1]];
+                if(arr[i] <= s){
+                    yes = dp[i][s - arr[i]];
                 }
 
-                dp[i][s] = yes || no;
+                dp[i+1][s] = yes || no;
             }
         }
 
@@ -37,18 +37,18 @@ public class SubsetSum {
         if(sum == 0)
             return true;
             
-        if(i == arr.length)
+        if(i == 0)
             return false;
             
         if(dp[i][sum] != null)
             return dp[i][sum];
             
-        boolean no = solve(arr, sum, i+1, dp);
+        boolean no = solve(arr, sum, i-1, dp);
         
         boolean yes = false;
         
-        if(arr[i] <= sum){
-            yes = solve(arr, sum - arr[i], i+1, dp);
+        if(arr[i-1] <= sum){
+            yes = solve(arr, sum - arr[i-1], i-1, dp);
         }
         
         return dp[i][sum] = no || yes;
