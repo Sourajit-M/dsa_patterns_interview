@@ -31,12 +31,15 @@ public class SplitLargestSumArray {
             if(sum + num > largest){
                 count++;
                 sum = num;
+
+                if(count > k)
+                    return false;
             }else{
                 sum += num;
             }
         }
 
-        return count <= k;
+        return true;
     }
     public static void main(String[] args) {
         int[] nums = {7,2,5,10,8};

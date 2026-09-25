@@ -32,10 +32,13 @@ public class AggressiveCows {
             if(cow - last_cow >= dist){
                 count++;
                 last_cow = cow;
+
+                if(count >= k)
+                    return true;
             }
         }
 
-        return count >= k;
+        return false;
     }
     public static void main(String[] args) {
         int[] arr = {1, 2, 4, 8, 9};
